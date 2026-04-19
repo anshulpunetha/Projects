@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zettelkasten Notes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="title-wrap">
+        <h1>Zettelkasten Notes</h1>
+        <p>Create linked ideas with post-it style notes.</p>
+      </div>
+      <div class="header-actions">
+        <button id="newNoteBtn" class="btn btn-primary" type="button">+ New Note</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <section class="panel">
+          <h2>Notes</h2>
+          <ul id="noteList" class="note-list" aria-label="All notes"></ul>
+        </section>
+
+        <section class="panel">
+          <h2>Link Notes</h2>
+          <label for="linkFromSelect">From</label>
+          <select id="linkFromSelect"></select>
+
+          <label for="linkToSelect">To</label>
+          <select id="linkToSelect"></select>
+
+          <button id="linkNotesBtn" class="btn" type="button">Create Link</button>
+          <p class="hint">Links create note threads for toggled views.</p>
+        </section>
+      </aside>
+
+      <section class="workspace">
+        <section class="toolbar panel" aria-label="Formatting controls">
+          <label for="fontFamily">Font</label>
+          <select id="fontFamily">
+            <option value="Arial, sans-serif">Arial</option>
+            <option value="Georgia, serif">Georgia</option>
+            <option value="'Courier New', monospace">Courier New</option>
+            <option value="'Trebuchet MS', sans-serif">Trebuchet MS</option>
+          </select>
+
+          <label for="fontSize">Size</label>
+          <select id="fontSize">
+            <option value="2">Small</option>
+            <option value="3" selected>Normal</option>
+            <option value="4">Large</option>
+            <option value="5">Extra Large</option>
+          </select>
+
+          <button class="btn" data-command="bold" type="button"><strong>B</strong></button>
+          <button class="btn" data-command="italic" type="button"><em>I</em></button>
+          <button class="btn" data-command="underline" type="button"><u>U</u></button>
+          <button class="btn" data-command="insertUnorderedList" type="button">• Bullets</button>
+        </section>
+
+        <section class="view-controls panel" aria-label="View controls">
+          <span>View:</span>
+          <button id="threadViewBtn" class="btn is-active" type="button">Thread Notes</button>
+          <button id="singleViewBtn" class="btn" type="button">Single Note</button>
+          <span id="viewDescription" class="hint"></span>
+        </section>
+
+        <section id="notesDisplay" class="notes-display" aria-live="polite"></section>
+      </section>
+    </main>
+
+    <template id="noteTemplate">
+      <article class="post-it" data-note-id="">
+        <header class="post-it-head">
+          <input class="note-title" type="text" maxlength="80" placeholder="Untitled note" />
+        </header>
+        <div class="editor" contenteditable="true" role="textbox" aria-multiline="true"></div>
+        <footer class="post-it-foot">
+          <small class="linked-count"></small>
+        </footer>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
